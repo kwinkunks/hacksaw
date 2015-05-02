@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-{% autoescape true %}
 <html>
-  <!-- [START head_html] -->
   <head>
-    <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
-	
-	<!--Load the AJAX API-->
+    <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
 
@@ -13,15 +8,15 @@
       google.load('visualization', '1.0', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
-      google.setOnLoadCallback(drawChart2);
       google.setOnLoadCallback(drawVisualization);
+      google.setOnLoadCallback(drawChart2);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      
-      function drawVisualization() {
+ 
+ 
+ 		function drawVisualization() {
        // Create and populate the data table.
        var data = new google.visualization.DataTable();
        var raw_data = [['Austria', -1336060, -1538156, -1576579, -1600652, -1968113, 1901067, 1, 2, 3, 4, 5, 6],
@@ -66,7 +61,7 @@
        
        
        // Create and draw the visualization.
-       new google.visualization.LineChart(document.getElementById('chart_div3')).
+       new google.visualization.LineChart(document.getElementById('chart_div')).
             draw(data, options);
                  
 
@@ -74,69 +69,17 @@
  
  
  
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-		var options = {
-  			'legend':'left',
-  			'title':'My Big Pie Chart',
-  			'is3D':true,
-  			'width':800,
-  			'height':800
-			}
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-
-      }
-      function drawChart2() {
-      
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Task');
-		data.addColumn('number', 'Hours per Day');
-		data.addRows([
-  		['Work', 11],
-  		['Eat', 2],
-  		['Commute', 2],
-  		['Watch TV', 2],
-  		['Sleep', {v:7, f:'7.000'}]
-		]);
-        // Set chart options
-		var options = {
-  			'legend':'left',
-  			'title':'Text Bar Chart',
-  			'is3D':true,
-  			'width':800,
-  			'height':800
-			}
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-      }
+ 
+ 
+ 
+ 
+ 
     </script>
   </head>
-  <!-- [END head_html] -->
+
   <body>
-
-    <a href="{{ url|safe }}">{{ url_linktext }}</a>
-
-    <div id="chart_div3"></div>
-	<div id="chart_div"></div>
-	<div id="chart_div2"></div>
-	
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+    <div id="chart_div2"></div>
   </body>
 </html>
-{% endautoescape %}
