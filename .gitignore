@@ -1,2 +1,6 @@
+# Notebooks
+.ipynb_checkpoints
+# Python
+*.pyc
 # Google App Engine generated folder
 appengine-generated/
