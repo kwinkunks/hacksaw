@@ -3,10 +3,13 @@ import urllib
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
-from las import LASReader
 
 import jinja2
 import webapp2
+import numpy as np
+import StringIO
+
+from las import LASReader
 
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
@@ -37,26 +40,38 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
 
     def post(self):
-        file = self.request.POST['file']
+        f = self.request.POST['file']
+
+        print "++++++++++++++++"
+
+        # # Make a file-like object to pass to LASReader
+        # flike = StringIO.StringIO()
+        # flike.write(f.value)
+
+        # Read the LAS file and create an las instance
+        las = LASReader.from_text(f.value, null_subs=np.nan, unknown_as_other=False)
+
         self.response.headers['Content-Type'] = "text/plain"
-        las = LASReader(file.value, null_subs=np.nan, unknown_as_other=False)
-        self.response.write(las.curves.names)
+        self.response.write("Curves: " + str(las.curves.names))
+
 
 class UploadHandler(webapp2.RequestHandler):
   def post(self):
     file = self.request.POST['file']
     self.response.headers['Content-Type'] = "text/plain"
 
+
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('about.html')
         self.response.write(template.render())
-        
+
+
 class ViewHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('view.html')
         self.response.write(template.render())
-        
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),

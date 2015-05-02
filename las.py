@@ -30,6 +30,7 @@ and makes the data available as a Python object.
 
 import re
 import keyword
+import StringIO
 
 import numpy as np
 
@@ -296,6 +297,15 @@ class LASReader(object):
             self.data2d = self.data.view(float).reshape(-1, c)
             if null_subs is not None:
                 self.data2d[self.data2d == self.null] = null_subs
+
+    @classmethod
+    def from_text(cls, text, null_subs=None, unknown_as_other=False):
+        
+        flike = StringIO.StringIO()
+        flike.write(text)
+        flike.seek(0)
+
+        return cls(flike, null_subs=null_subs, unknown_as_other=unknown_as_other)
 
     def __read_wrapped_row(self, f, n):
         """
