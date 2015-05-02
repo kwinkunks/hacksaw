@@ -1,7 +1,11 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+  {% block content %}
+      
 {% autoescape true %}
-<html>
-  <!-- [START head_html] -->
+
   <head>
     <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
 	
@@ -131,17 +135,13 @@
   <!-- [END head_html] -->
   <body>
 
-    <a href="{{ url|safe }}">{{ url_linktext }}</a>
-
-    <div id="chart_div3"></div>
-	<div id="chart_div"></div>
-	<div id="chart_div2"></div>
-	
+<div class="container">
 <form action="/" enctype="multipart/form-data" method="post">
 <input type="file" name="file">
 <input type="submit">
 </form>
-  
+</div>
+
   </body>
-</html>
 {% endautoescape %}
+  {% endblock %}

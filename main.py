@@ -51,8 +51,16 @@ class MainPage(webapp2.RequestHandler):
         # Read the LAS file and create an las instance
         las = LASReader.from_text(f.value, null_subs=np.nan, unknown_as_other=False)
 
-        self.response.headers['Content-Type'] = "text/plain"
-        self.response.write("Curves: " + str(las.curves.names))
+        # self.response.headers['Content-Type'] = "text/plain"
+        # self.response.write("Curves: " + str(las.curves.names))
+
+        template_values = {
+            'data': las.data,
+            'well': las.well.WELL.data,
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('view.html')
+        self.response.write(template.render(template_values))
 
 
 class UploadHandler(webapp2.RequestHandler):
