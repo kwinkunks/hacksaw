@@ -65,10 +65,26 @@ class MainPage(webapp2.RequestHandler):
             'url': url,
             'url_linktext': url_linktext,
         }
-
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render(template_values))
 
+        self.response.headers['Content-Type'] = "text/html"
+        self.response.write('''
+          <form action="/" enctype="multipart/form-data" method="post">
+          <input type="file" name="file">
+          <input type="submit">
+          </form>''')
+
+    def post(self):
+        file = self.request.POST['file']
+        self.response.headers['Content-Type'] = "text/plain"
+        self.response.write(file.value)
+
+class UploadHandler(webapp2.RequestHandler):
+  def post(self):
+    file = self.request.POST['file']
+    self.response.headers['Content-Type'] = "text/plain"
+    self.response.write(file.value)
 
 class Guestbook(webapp2.RequestHandler):
 
@@ -97,4 +113,5 @@ class Guestbook(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
+    ('/upload', UploadHandler)
 ], debug=True)
