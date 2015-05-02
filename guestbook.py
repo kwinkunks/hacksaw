@@ -3,6 +3,7 @@ import urllib
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from las import LASReader
 
 import jinja2
 import webapp2
@@ -78,13 +79,13 @@ class MainPage(webapp2.RequestHandler):
     def post(self):
         file = self.request.POST['file']
         self.response.headers['Content-Type'] = "text/plain"
-        self.response.write(file.value)
+        las = LASReader(file.value, null_subs=np.nan, unknown_as_other=False)
+        self.response.write(las.curves.names)
 
 class UploadHandler(webapp2.RequestHandler):
   def post(self):
     file = self.request.POST['file']
     self.response.headers['Content-Type'] = "text/plain"
-    self.response.write(file.value)
 
 class Guestbook(webapp2.RequestHandler):
 
@@ -108,7 +109,6 @@ class Guestbook(webapp2.RequestHandler):
 
         query_params = {'guestbook_name': guestbook_name}
         self.redirect('/?' + urllib.urlencode(query_params))
-
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
