@@ -4,14 +4,20 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /stylesheets
-  static_dir: stylesheets
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /static
+  static_dir: static
 
 - url: /.*
-  script: guestbook.app
+  script: main.app
 
 libraries:
 - name: webapp2
   version: latest
 - name: jinja2
+  version: latest
+- name: numpy
   version: latest
