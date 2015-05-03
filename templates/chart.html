@@ -10,6 +10,8 @@
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawChart);
       google.setOnLoadCallback(drawChart2);
+      google.setOnLoadCallback(drawChart3);
+      google.setOnLoadCallback(drawChart4);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -33,8 +35,8 @@
   			'legend':'left',
   			'title':'My Big Pie Chart',
   			'is3D':true,
-  			'width':800,
-  			'height':800
+  			'width':80,
+  			'height':80
 			}
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -59,19 +61,82 @@
   			'legend':'left',
   			'title':'Text Bar Chart',
   			'is3D':true,
-  			'width':800,
-  			'height':800
+  			'width':80,
+  			'height':80
 			}
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
         chart.draw(data, options);
       }
+      
+            function drawChart3() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+		var options = {
+  			'legend':'left',
+  			'title':'My Big Pie Chart',
+  			'is3D':true,
+  			'width':80,
+  			'height':80
+			}
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div3'));
+        chart.draw(data, options);
+
+      }
+            function drawChart4() {
+      
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Task');
+		data.addColumn('number', 'Hours per Day');
+		data.addRows([
+  		['Work', 11],
+  		['Eat', 2],
+  		['Commute', 2],
+  		['Watch TV', 2],
+  		['Sleep', {v:7, f:'7.000'}]
+		]);
+        // Set chart options
+		var options = {
+  			'legend':'left',
+  			'title':'Text Bar Chart',
+  			'is3D':true,
+  			'width':80,
+  			'height':80
+			}
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
+        chart.draw(data, options);
+      }
+      
     </script>
   </head>
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-    <div id="chart_div2"></div>
+
+    
+    
+    <div id="chart_div" style="float: left"> </div>
+        
+    <div id="chart_div2" style="float: left"> </div>
+        
+    <div id="chart_div3" style="float: left"> </div>
+    <div id="chart_div4" style="float: left"> </div>
+    
+    
   </body>
 </html>
