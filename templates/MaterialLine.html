@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      //google.load('visualization', '1.0', {'packages':['corechart']});
+      
+      google.load('visualization', '1.1', {packages: ['line']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawVisualization);
+      //google.setOnLoadCallback(drawVisualization2);
+    //google.setOnLoadCallback(drawVisualization3);
+    //google.setOnLoadCallback(drawVisualization4);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+ 
+ 
+ 
+
+ 
+ 		function drawVisualization() {
+ 		
+ 		
+ 		//alert(window.screen.availWidth);
+       // alert(window.screen.availHeight);
+ 		
+ 		
+       // Create and populate the data table.
+       var data = new google.visualization.DataTable();
+       var raw_data = [
+                       ['Denmark', 1001582, 1119450, 993360, 1004163, 979198, 916965, 1001582, 1119450, 993360, 1004163, 979198, 916965],
+                       
+                      ];
+
+       var years = [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014];
+
+       data.addColumn('string', 'Depth');
+       for (var i = 0; i  < raw_data.length; ++i) {
+         data.addColumn('number', raw_data[i][0]);    
+       }
+
+       data.addRows(years.length);
+
+       for (var j = 0; j < years.length; ++j) {    
+         data.setValue(j, 0, years[j].toString());    
+       }
+       for (var i = 0; i  < raw_data.length; ++i) {
+         for (var j = 1; j  < raw_data[i].length; ++j) {
+            data.setValue(j-1, i+1, raw_data[i][j]);    
+         }
+       }
+
+       var options = {
+       chart: {
+          title: 'Test Test Test',
+          subtitle: raw_data[0][0]
+        },
+       			  //title:'test test',
+       			  titleTextStyle: { color: 'green',
+  									fontName: 'Times-Roman',
+  									//fontSize: 26,
+  									bold: true,
+  									italic: false },
+                  //width: window.screen.availWidth / 2, 
+                  height:window.screen.availHeight,
+                  orientation: 'vertical',
+                  vAxis: {title: "Depth"},
+                  hAxis: {title: "Value"},
+                  legend: {position: 'none', textStyle: {color: 'blue', fontSize: 12}},
+                   axes: {
+          				x: {
+            			0: {side: 'top'}
+          				   }
+          				 }
+                  }
+       
+      // log(chart_div);
+       
+       // Create and draw the visualization.
+       new google.charts.Line(document.getElementById('chart_div')).draw(data, google.charts.Line.convertOptions(options));
+       
+       //var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+                 
+
+      }
+ 
+
+ 
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the charts-->
+   
+
+     
+     <div id="chart_div" style="float: left; float:left;border:2px Solid #FF0000"></div>
+  
+
+
+  </body>
+</html>
