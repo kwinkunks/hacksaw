@@ -10,7 +10,7 @@ import numpy as np
 import StringIO
 
 from las import LASReader
-
+from hacksaw import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -42,21 +42,24 @@ class MainPage(webapp2.RequestHandler):
     def post(self):
         f = self.request.POST['file']
 
-        print "++++++++++++++++"
-
-        # # Make a file-like object to pass to LASReader
-        # flike = StringIO.StringIO()
-        # flike.write(f.value)
 
         # Read the LAS file and create an las instance
-        las = LASReader.from_text(f.value, null_subs=np.nan, unknown_as_other=False)
+        d = LASReader.from_text(f.value, null_subs=np.nan, unknown_as_other=False)
 
-        # self.response.headers['Content-Type'] = "text/plain"
-        # self.response.write("Curves: " + str(las.curves.names))
+                
+        c = get_aliases(d.curves.names)
+        
+            
+        dict_to_pass = {}
+        
+        for k, v in c.items():
+            dict_to_pass[k] = list(d.data[v])
+        
+        j = json.dumps(dict_to_pass)
 
         template_values = {
-            'data': las.data,
-            'well': las.well.WELL.data,
+            'data': j,
+            'well': d.well.WELL.data,
         }
 
         template = JINJA_ENVIRONMENT.get_template('view.html')
