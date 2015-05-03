@@ -23,9 +23,9 @@
 	   
 	   var arr_from_json = {{ data }};
 	   
-       var raw_data = arr_from_json.DT.slice(1, 500);
+       var raw_data = arr_from_json.DT;
 
-       var years = arr_from_json.DEPTH.slice(1, 500);
+       var years = arr_from_json.DEPTH;
 
        data.addColumn('string', 'Depth');
        data.addColumn('number', 'DT');   
@@ -40,14 +40,14 @@
        }
 
        var options = {
-       			  title:"Test test test test test test test",
+       			  title:"Log Display",
        			  titleTextStyle: { color: 'breen',
   									fontName: 'Times-Roman',
   									fontSize: 26,
   									bold: true,
   									italic: false },
                   //width:600, height:400,
-				  height: raw_data.length * 10,
+				  height: raw_data.length * 25,
                   isStacked: 'true',
                   orientation: 'vertical',
                   vAxis: {title: "Depth"},
@@ -55,12 +55,8 @@
                   legend: {position: 'top', textStyle: {color: 'blue', fontSize: 12}}
                   }
        
-      // log(chart_div);
-       
        // Create and draw the visualization.
        new google.visualization.LineChart(document.getElementById('chart_div9')).draw(data, options);
-                 
-
       }
     </script>
       
