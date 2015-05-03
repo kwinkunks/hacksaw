@@ -17,7 +17,16 @@
       // draws it.
  
  
+ 
+
+ 
  		function drawVisualization() {
+ 		
+ 		
+ 		//alert(window.screen.availWidth);
+       // alert(window.screen.availHeight);
+ 		
+ 		
        // Create and populate the data table.
        var data = new google.visualization.DataTable();
        var raw_data = [
@@ -44,14 +53,13 @@
        }
 
        var options = {
-       			  title:"Test test test test test test test",
-       			  titleTextStyle: { color: 'breen',
+       			  title:raw_data[0][0],
+       			  titleTextStyle: { color: 'green',
   									fontName: 'Times-Roman',
   									fontSize: 26,
   									bold: true,
   									italic: false },
-                  //width:600, height:400,
-                  isStacked: 'true',
+                  //width: window.screen.availWidth / 5, height:window.screen.availHeight / 5,
                   orientation: 'vertical',
                   vAxis: {title: "Depth"},
                   hAxis: {title: "Value"},
@@ -97,8 +105,7 @@ function drawVisualization2() {
   									fontSize: 26,
   									bold: true,
   									italic: false },
-                  //width:600, height:400,
-                  isStacked: 'true',
+                  //width: window.screen.availWidth / 5, height:window.screen.availHeight / 5,
                   orientation: 'vertical',
                   vAxis: {title: "Depth"},
                   hAxis: {title: "Value"},
@@ -145,7 +152,7 @@ function drawVisualization2() {
   									fontSize: 26,
   									bold: true,
   									italic: false },
-                  //width:600, height:400,
+                  //width: window.screen.availWidth / 5, height:window.screen.availHeight / 5,
                   isStacked: 'true',
                   orientation: 'vertical',
                   vAxis: {title: "Depth"},
@@ -193,7 +200,7 @@ function drawVisualization2() {
   									fontSize: 26,
   									bold: true,
   									italic: false },
-                  //width:600, height:400,
+                 // width: window.screen.availWidth / 5, height:window.screen.availHeight / 5,
                   isStacked: 'true',
                   orientation: 'vertical',
                   vAxis: {title: "Depth"},
@@ -215,10 +222,13 @@ function drawVisualization2() {
 
   <body>
     <!--Div that will hold the charts-->
-    <div id="chart_div" style="float: left">  </div>
-    <div id="chart_div2" style="float: left">  </div>
-    <div id="chart_div3" style="float: left"></div>
-     <div id="chart_div4" style="float: left"></div>   
+   
+
+     
+     <div id="chart_div" style="float: left; width: 23%; float:left;border:2px Solid #FF0000"></div>
+     <div id="chart_div2" style="float: left; width: 23%; float:left;border:2px Solid #FF0000"></div>
+     <div id="chart_div3" style="float: left; width: 23%; float:left;border:2px Solid #FF0000"></div>
+     <div id="chart_div4" style="float: left; width: 23%;  float:left;border:2px Solid #FF0000"></div>
     
   
 
