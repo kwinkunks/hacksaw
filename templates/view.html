@@ -13,6 +13,9 @@
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawVisualization);
+      google.setOnLoadCallback(drawVisualization2);
+      google.setOnLoadCallback(drawVisualization3);
+      google.setOnLoadCallback(drawVisualization4);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -56,7 +59,134 @@
                   }
        
        // Create and draw the visualization.
-       new google.visualization.LineChart(document.getElementById('chart_div9')).draw(data, options);
+       new google.visualization.LineChart(document.getElementById('chart_div')).draw(data, options);
+      }
+      
+      
+      	  function drawVisualization() {
+       // Create and populate the data table.
+       var data = new google.visualization.DataTable();
+	   
+	   var arr_from_json = {{ data }};
+	   
+       var raw_data = arr_from_json.DT;
+
+       var years = arr_from_json.DEPTH;
+
+       data.addColumn('string', 'Depth');
+       data.addColumn('number', 'DT');   
+
+       data.addRows(years.length);
+
+       for (var j = 0; j < years.length; ++j) {    
+         data.setValue(j, 0, years[j].toString());    
+       }
+       for (var j = 0; j  < raw_data.length; ++j) {
+            data.setValue(j, 1, raw_data[j]);
+       }
+
+       var options = {
+       			  title:"Log Display",
+       			  titleTextStyle: { color: 'breen',
+  									fontName: 'Times-Roman',
+  									fontSize: 26,
+  									bold: true,
+  									italic: false },
+                  //width:600, height:400,
+				  height: raw_data.length * 25,
+                  isStacked: 'true',
+                  orientation: 'vertical',
+                  vAxis: {title: "Depth"},
+                  hAxis: {title: "Value"},
+                  legend: {position: 'top', textStyle: {color: 'blue', fontSize: 12}}
+                  }
+       
+       // Create and draw the visualization.
+       new google.visualization.LineChart(document.getElementById('chart_div2')).draw(data, options);
+      }
+      
+      	  function drawVisualization() {
+       // Create and populate the data table.
+       var data = new google.visualization.DataTable();
+	   
+	   var arr_from_json = {{ data }};
+	   
+       var raw_data = arr_from_json.DT;
+
+       var years = arr_from_json.DEPTH;
+
+       data.addColumn('string', 'Depth');
+       data.addColumn('number', 'DT');   
+
+       data.addRows(years.length);
+
+       for (var j = 0; j < years.length; ++j) {    
+         data.setValue(j, 0, years[j].toString());    
+       }
+       for (var j = 0; j  < raw_data.length; ++j) {
+            data.setValue(j, 1, raw_data[j]);
+       }
+
+       var options = {
+       			  title:"Log Display",
+       			  titleTextStyle: { color: 'breen',
+  									fontName: 'Times-Roman',
+  									fontSize: 26,
+  									bold: true,
+  									italic: false },
+                  //width:600, height:400,
+				  height: raw_data.length * 25,
+                  isStacked: 'true',
+                  orientation: 'vertical',
+                  vAxis: {title: "Depth"},
+                  hAxis: {title: "Value"},
+                  legend: {position: 'top', textStyle: {color: 'blue', fontSize: 12}}
+                  }
+       
+       // Create and draw the visualization.
+       new google.visualization.LineChart(document.getElementById('chart_div3')).draw(data, options);
+      }
+      
+      	  function drawVisualization() {
+       // Create and populate the data table.
+       var data = new google.visualization.DataTable();
+	   
+	   var arr_from_json = {{ data }};
+	   
+       var raw_data = arr_from_json.DT;
+
+       var years = arr_from_json.DEPTH;
+
+       data.addColumn('string', 'Depth');
+       data.addColumn('number', 'DT');   
+
+       data.addRows(years.length);
+
+       for (var j = 0; j < years.length; ++j) {    
+         data.setValue(j, 0, years[j].toString());    
+       }
+       for (var j = 0; j  < raw_data.length; ++j) {
+            data.setValue(j, 1, raw_data[j]);
+       }
+
+       var options = {
+       			  title:"Log Display",
+       			  titleTextStyle: { color: 'breen',
+  									fontName: 'Times-Roman',
+  									fontSize: 26,
+  									bold: true,
+  									italic: false },
+                  //width:600, height:400,
+				  height: raw_data.length * 25,
+                  isStacked: 'true',
+                  orientation: 'vertical',
+                  vAxis: {title: "Depth"},
+                  hAxis: {title: "Value"},
+                  legend: {position: 'top', textStyle: {color: 'blue', fontSize: 12}}
+                  }
+       
+       // Create and draw the visualization.
+       new google.visualization.LineChart(document.getElementById('chart_div4')).draw(data, options);
       }
     </script>
       
@@ -66,7 +196,14 @@
 
     <p>All the data!</p>
 
-	<div id="chart_div9"></div>
+
+	
+     <div id="chart_div" style="float: left; width: 23%; float:left;border:2px Solid #FF0000"></div>
+     <div id="chart_div2" style="float: left; width: 23%; float:left;border:2px Solid #FF0000"></div>
+     <div id="chart_div3" style="float: left; width: 23%; float:left;border:2px Solid #FF0000"></div>
+     <div id="chart_div4" style="float: left; width: 23%;  float:left;border:2px Solid #FF0000"></div>
+     
+     
   </div>
 
   {% endblock %}
