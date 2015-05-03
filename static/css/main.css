@@ -2,3 +2,10 @@ body {
   font-family: Verdana, Helvetica, sans-serif;
   background-color: #DDDDDD;
 }
+
+.hacksaw-title {
+    padding-left: 48px;
+    background:transparent url('/static/img/logo.png') left center no-repeat;
+    background-size: 96px;
+    background-position: 12px;
+}
