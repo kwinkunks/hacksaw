@@ -3,14 +3,74 @@
 {% block title %} &middot; view{% endblock %}
 
   {% block content %}
+  
+  <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawVisualization);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+	  function drawVisualization() {
+       // Create and populate the data table.
+       var data = new google.visualization.DataTable();
+	   
+	   var arr_from_json = {{ data }};
+	   
+       var raw_data = arr_from_json.DT.slice(1, 500);
+
+       var years = arr_from_json.DEPTH.slice(1, 500);
+
+       data.addColumn('string', 'Depth');
+       data.addColumn('number', 'DT');   
+
+       data.addRows(years.length);
+
+       for (var j = 0; j < years.length; ++j) {    
+         data.setValue(j, 0, years[j].toString());    
+       }
+       for (var j = 0; j  < raw_data.length; ++j) {
+            data.setValue(j, 1, raw_data[j]);
+       }
+
+       var options = {
+       			  title:"Test test test test test test test",
+       			  titleTextStyle: { color: 'breen',
+  									fontName: 'Times-Roman',
+  									fontSize: 26,
+  									bold: true,
+  									italic: false },
+                  //width:600, height:400,
+				  height: raw_data.length * 10,
+                  isStacked: 'true',
+                  orientation: 'vertical',
+                  vAxis: {title: "Depth"},
+                  hAxis: {title: "Value"},
+                  legend: {position: 'top', textStyle: {color: 'blue', fontSize: 12}}
+                  }
+       
+      // log(chart_div);
+       
+       // Create and draw the visualization.
+       new google.visualization.LineChart(document.getElementById('chart_div9')).draw(data, options);
+                 
+
+      }
+    </script>
       
   <div class="container">
 
 	<h2>{{ well }}</h2>
 
     <p>All the data!</p>
-    <p>{{ data['DEPTH'] }}</p>
 
+	<div id="chart_div9"></div>
   </div>
 
   {% endblock %}

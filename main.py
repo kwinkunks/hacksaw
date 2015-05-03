@@ -8,6 +8,7 @@ import jinja2
 import webapp2
 import numpy as np
 import StringIO
+import re
 
 from las import LASReader
 from hacksaw import *
@@ -44,18 +45,19 @@ class MainPage(webapp2.RequestHandler):
 
 
         # Read the LAS file and create an las instance
-        d = LASReader.from_text(f.value, null_subs=np.nan, unknown_as_other=False)
+        d = LASReader.from_text(f.value, unknown_as_other=False)
 
                 
         c = get_aliases(d.curves.names)
         
             
-        dict_to_pass = {}
+        dict_to_pass = {d.curves.names[0]:list(d.data[d.curves.names[0]])}
         
         for k, v in c.items():
             dict_to_pass[k] = list(d.data[v])
         
         j = json.dumps(dict_to_pass)
+        j = re.sub(r'"(.+?)": ', r'\1:', j)
 
         template_values = {
             'data': j,
